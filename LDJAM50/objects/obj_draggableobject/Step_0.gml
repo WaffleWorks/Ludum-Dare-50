@@ -23,13 +23,16 @@ if !mouse_check_button(mb_left) and grab = true
 			instance_destroy()
 			spawner_object.amount += 1
 		}
+		audio_play_sound(snd_error,0,false)
 	}else
 	{
 		//successful release
+		//move_snap(16,16)
 		grab = false
 		depth = 0
 		global.dragging = false
 		placed = true
+		audio_play_sound(snd_success,0,false)
 	}
 }
 

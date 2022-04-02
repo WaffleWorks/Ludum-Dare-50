@@ -1,7 +1,7 @@
 {
   "spriteId": {
-    "name": "spr_leftblock",
-    "path": "sprites/spr_leftblock/spr_leftblock.yy",
+    "name": "spr_crate",
+    "path": "sprites/spr_crate/spr_crate.yy",
   },
   "solid": false,
   "visible": true,
@@ -31,7 +31,7 @@
     "path": "folders/Objects.yy",
   },
   "resourceVersion": "1.0",
-  "name": "obj_leftblock",
+  "name": "obj_crate",
   "tags": [],
   "resourceType": "GMObject",
 }

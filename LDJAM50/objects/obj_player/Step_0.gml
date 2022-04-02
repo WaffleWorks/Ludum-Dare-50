@@ -13,11 +13,16 @@ if !place_meeting(x,y,obj_ladder) and ladder = true
 	ladder = false
 	vsp = 0
 	walking = true
+	if grounded = false
+	{
+		sprite_index = spr_playerairborn
+		image_index = 1
+	}
 }
 //spring
 if place_meeting(x,y,obj_spring) and walking = true and instance_nearest(x,y,obj_spring).grounded = true
 {
-	if x - (sprite_width/2) = instance_nearest(x,y,obj_spring).x and y - (sprite_height/2) >= instance_nearest(x,y,obj_spring).y
+	if x - (sprite_width/2) = instance_nearest(x,y,obj_spring).x and y - (8) >= instance_nearest(x,y,obj_spring).y
 	and instance_nearest(x,y,obj_spring).used = false and instance_nearest(x,y,obj_spring).grab = false and vsp >= 0
 	{
 		//collide with spring
@@ -29,21 +34,8 @@ if place_meeting(x,y,obj_spring) and walking = true and instance_nearest(x,y,obj
 		vsp = vsp_spring
 		hsp = 0
 		
-	}
-}
-//dir blocks
-if place_meeting(x+1,y,obj_leftblock)
-{
-	if instance_nearest(x,y,obj_leftblock).grab = false
-	{
-		dir = -1
-	}
-}
-if place_meeting(x-1,y,obj_rightblock)
-{
-	if instance_nearest(x,y,obj_rightblock).grab = false
-	{
-		dir = 1
+		audio_play_sound(snd_boing,0,false)
+		
 	}
 }
 
@@ -54,12 +46,21 @@ if place_meeting(x-1,y,obj_rightblock)
 //if all movement states are false, walk
 if ladder = false and spring = false
 {
+	
+	if hsp != 0 and grounded = true
+	{
+		sprite_index = spr_playerwalking
+	}else if grounded = true
+	{
+		sprite_index = spr_playeridle	
+	}
 	hsp = 1 * dir
 	vsp = vsp + grv;
 	walking = true
+	
 }else
 {
-	walking = true	
+	walking = false	
 }
 //ladder
 if ladder = true
@@ -67,6 +68,8 @@ if ladder = true
 	hsp = 0
 	vsp = -1
 	spring = false
+	
+	sprite_index = spr_playerclimbing
 }
 //spring
 if spring = true
@@ -78,10 +81,29 @@ if spring = true
 	}
 }
 
+//airborn sprite
+if grounded = false and sprite_index != spr_playerclimbing
+{
+	sprite_index = spr_playerairborn
+	if vsp < 0
+	{
+		image_index = 0
+	}else
+	{
+		image_index = 1	
+	}
+}
+
 //COLLISIONS
-if place_meeting(x,y+1,obj_ground)
+if place_meeting(x,y+1,obj_ground) or place_meeting(x,y+1,obj_bridge)
 {
 	grounded = true
+}else if place_meeting(x,y+1,obj_collidabledraggable)
+{
+	if instance_nearest(x-8,y-8,obj_collidabledraggable).grab = false
+	{
+		grounded = true
+	}
 }else
 {
 	grounded = false
@@ -89,13 +111,28 @@ if place_meeting(x,y+1,obj_ground)
 
 //Check for horizontal collisions
 var onepixel = sign(hsp)
+//ground
 if (place_meeting(x+hsp,y,obj_ground))
 {
     while (!place_meeting(x+onepixel,y,obj_ground))
     {
         x = x + onepixel;
     }
+	dir *= -1
     hsp = 0;
+}
+//object
+if (place_meeting(x+hsp,y,obj_collidabledraggable)) 
+{
+	if instance_nearest(x-8,y-8,obj_collidabledraggable).grab = false
+	{
+	    while (!place_meeting(x+onepixel,y,obj_collidabledraggable))
+	    {
+	        x = x + onepixel;
+	    }
+		dir *= -1
+	    hsp = 0;
+	}
 }
 x = x + hsp;
 //Check for vertical collision
@@ -109,7 +146,19 @@ if (place_meeting(x,y+vsp,obj_ground))
 	}
 	vsp = 0;
 }
-
+//object
+if (place_meeting(x,y+vsp,obj_collidabledraggable)) 
+{
+	if instance_nearest(x-8,y-8,obj_collidabledraggable).grab = false
+	{
+	    while (!place_meeting(x,y+onepixel,obj_collidabledraggable))
+	    {
+	        y = y + onepixel;
+	    }
+	    vsp = 0;
+	}
+}
+//bridge
 if (place_meeting(x,y+vsp,obj_bridge))// and instance_nearest(x,y,obj_bridge).grab = false
 {
 	if bbox_bottom < instance_nearest(x,y,obj_bridge).bbox_bottom

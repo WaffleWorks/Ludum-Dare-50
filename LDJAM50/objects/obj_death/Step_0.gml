@@ -2,14 +2,12 @@
 
 ///create path and move towards it
 var xx = (obj_player.x div 16) * 16
-var yy = (obj_player.y div 16) * 16 - 4
+var yy = (obj_player.y div 16) * 16 - 2
 
 if mp_grid_path(global.grid,path,x,y,xx,yy,true)
 {
 	path_start(path,0.75,path_action_stop,false)	
 }
-
-show_debug_message(direction)
 
 //facing
 if direction >= 0 and direction <= 90

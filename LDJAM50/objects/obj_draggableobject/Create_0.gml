@@ -16,3 +16,5 @@ placed = false
 spawner_object = obj_ladderspawner;
 yellow = false //once an object has been placed and isn't colliding w/ mouse, true
 init_sprite = sprite_index
+
+snap = false
