@@ -1,7 +1,7 @@
 {
   "spriteId": {
-    "name": "spr_black",
-    "path": "sprites/spr_black/spr_black.yy",
+    "name": "spr_grimreaper",
+    "path": "sprites/spr_grimreaper/spr_grimreaper.yy",
   },
   "solid": false,
   "visible": true,
