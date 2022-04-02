@@ -54,7 +54,15 @@ if ladder = false and spring = false
 	{
 		sprite_index = spr_playeridle	
 	}
-	hsp = 1 * dir
+	if idle = false and idle_on_start = false
+	{
+		hsp = 1 * dir
+	}
+	if idle_on_start = true
+	{
+		hsp = 0
+		sprite_index = spr_playeridle
+	}
 	vsp = vsp + grv;
 	walking = true
 	
@@ -63,7 +71,7 @@ if ladder = false and spring = false
 	walking = false	
 }
 //ladder
-if ladder = true
+if ladder = true and dead = false
 {
 	hsp = 0
 	vsp = -1
@@ -186,8 +194,32 @@ if place_meeting(x,y,obj_finishline)
 {
 	if x - (sprite_width/2) = obj_finishline.x
 	{
-		room_restart()
+		if !instance_exists(obj_fadeout)
+		{
+			instance_create_depth(0,0,0,obj_fadeout)
+			idle = true
+			hsp = 0
+			sprite_index = spr_playeridle
+			//room_restart()
+		}
 	}
+}
+
+//DIE
+if dead = true
+{
+	if image_alpha > 0
+	{
+		image_alpha -= 0.025
+	}
+	if image_alpha <= 0 and !instance_exists(obj_fadeout)
+	{
+		instance_create_depth(x,y,depth,obj_fadeout)
+	}
+	idle = true
+	hsp = 0
+	vsp = 0
+	image_speed = 0	
 }
 
 move_snap(1,1)

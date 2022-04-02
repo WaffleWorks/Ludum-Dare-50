@@ -1,4 +1,4 @@
-draw_self()
+
 if sprite_index = init_sprite
 {
 	if grab = true
@@ -10,6 +10,7 @@ if sprite_index = init_sprite
 		{
 			snap = false
 			image_index = 1 //red
+
 		}else
 		{
 			snap = true
@@ -17,7 +18,6 @@ if sprite_index = init_sprite
 		}
 		if snap = false
 		{
-			image_alpha = 0
 			if placed = true
 			{
 				draw_sprite(sprite_index,image_index,mouse_x+xx,mouse_y+yy)
@@ -25,6 +25,7 @@ if sprite_index = init_sprite
 			{
 				draw_sprite(sprite_index,image_index,mouse_x - ((bbox_right + 1 - bbox_left)/2),mouse_y - ((bbox_bottom + 1 - bbox_top)/2)	)
 			}
+			image_alpha = 0
 		}else
 		{
 			image_alpha = 1
@@ -42,3 +43,5 @@ if sprite_index = init_sprite
 	}
 
 }
+
+draw_self()

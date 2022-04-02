@@ -4,9 +4,17 @@
 var xx = (obj_player.x div 16) * 16
 var yy = (obj_player.y div 16) * 16 - 2
 
-if mp_grid_path(global.grid,path,x,y,xx,yy,true)
+if mp_grid_path(global.grid,path,x,y,xx,yy,false) and active = true
 {
 	path_start(path,0.75,path_action_stop,false)	
+}
+
+if active = true
+{
+	if image_alpha < 1
+	{
+		image_alpha += 0.05
+	}
 }
 
 //facing
@@ -19,7 +27,7 @@ or direction <= 360 and direction >= 270
 	image_xscale = -1
 }
 
-if place_meeting(x,y,obj_player)
+if place_meeting(x,y,obj_player) and active = true
 {
-	//room_restart()
+	obj_player.dead = true
 }

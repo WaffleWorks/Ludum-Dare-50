@@ -10,5 +10,10 @@ walking = true
 
 spring = false
 ladder = false
+idle = false
+idle_on_start = true
+alarm[0] = 90
+
+dead = false
 
 depth = -5
