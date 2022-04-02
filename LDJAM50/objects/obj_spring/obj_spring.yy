@@ -1,7 +1,7 @@
 {
   "spriteId": {
-    "name": "spr_pink",
-    "path": "sprites/spr_pink/spr_pink.yy",
+    "name": "spr_spring2",
+    "path": "sprites/spr_spring2/spr_spring2.yy",
   },
   "solid": false,
   "visible": true,
@@ -25,6 +25,8 @@
   "physicsShapePoints": [],
   "eventList": [
     {"isDnD":false,"eventNum":0,"eventType":2,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
+    {"isDnD":false,"eventNum":0,"eventType":0,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
+    {"isDnD":false,"eventNum":0,"eventType":3,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
   ],
   "properties": [],
   "overriddenProperties": [],

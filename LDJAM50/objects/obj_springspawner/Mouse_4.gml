@@ -7,5 +7,6 @@ if amount > 0 and global.dragging = false
 		grab = true
 		global.dragging = true
 		spawner_object = obj_springspawner
+		depth = -1
 	}
 }

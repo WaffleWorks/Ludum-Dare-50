@@ -7,8 +7,9 @@ if amount > 0 and global.dragging = false
 		grab = true
 		global.dragging = true
 		spawner_object = obj_ladderspawner
-		image_yscale = 4
+		//image_yscale = 4
 		xx = x - mouse_x
 		yy = y - mouse_y
+		depth = -1
 	}
 }

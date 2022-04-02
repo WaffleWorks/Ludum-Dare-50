@@ -2,7 +2,7 @@
 //ladder
 if place_meeting(x,y,obj_ladder) and walking = true and instance_nearest(x,y,obj_ladder).grounded = true and vsp <= 0
 {
-	if x = instance_nearest(x,y,obj_ladder).x and instance_nearest(x,y,obj_ladder).grab = false
+	if x - (sprite_width/2) = instance_nearest(x,y-56,obj_ladder).x and instance_nearest(x,y-56,obj_ladder).grab = false
 	{
 		ladder = true
 		walking = false
@@ -17,10 +17,12 @@ if !place_meeting(x,y,obj_ladder) and ladder = true
 //spring
 if place_meeting(x,y,obj_spring) and walking = true and instance_nearest(x,y,obj_spring).grounded = true
 {
-	if x = instance_nearest(x,y,obj_spring).x and y >= instance_nearest(x,y,obj_spring).y
-	and instance_nearest(x,y,obj_spring).used = false and instance_nearest(x,y,obj_spring).grab = false
+	if x - (sprite_width/2) = instance_nearest(x,y,obj_spring).x and y - (sprite_height/2) >= instance_nearest(x,y,obj_spring).y
+	and instance_nearest(x,y,obj_spring).used = false and instance_nearest(x,y,obj_spring).grab = false and vsp >= 0
 	{
+		//collide with spring
 		instance_nearest(x,y,obj_spring).used = true
+		instance_nearest(x,y,obj_spring).sprung = true
 		instance_nearest(x,y,obj_spring).alarm[0] = 90
 		spring = true
 		walking = false
@@ -108,7 +110,7 @@ if (place_meeting(x,y+vsp,obj_ground))
 	vsp = 0;
 }
 
-if (place_meeting(x,y+vsp,obj_bridge)) and instance_nearest(x,y,obj_bridge).grab = false
+if (place_meeting(x,y+vsp,obj_bridge))// and instance_nearest(x,y,obj_bridge).grab = false
 {
 	if bbox_bottom < instance_nearest(x,y,obj_bridge).bbox_bottom
 	and vsp >= 0
@@ -133,7 +135,10 @@ if (place_meeting(x,y+vsp,obj_bridge)) and instance_nearest(x,y,obj_bridge).grab
 
 if place_meeting(x,y,obj_finishline)
 {
-	room_restart()
+	if x - (sprite_width/2) = obj_finishline.x
+	{
+		room_restart()
+	}
 }
 
 move_snap(1,1)

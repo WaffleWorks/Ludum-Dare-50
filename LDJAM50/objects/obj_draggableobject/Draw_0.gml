@@ -1,17 +1,27 @@
 draw_self()
-if grab = true
+if sprite_index = init_sprite
 {
-	if place_meeting(x,y,obj_ground)
-	or place_meeting(x,y,obj_draggableobject)
-	or place_meeting(x,y,obj_player)
-	or grounded = false
+	if grab = true
 	{
-		image_alpha = 0.5
-	}else
+		if place_meeting(x,y,obj_ground)
+		or place_meeting(x,y,obj_draggableobject)
+		or place_meeting(x,y,obj_player)
+		or grounded = false
+		{
+			image_index = 1 //red
+		}else
+		{
+			image_index = 2 //green
+		}
+	}else 
 	{
-		image_alpha = 1
+		if instance_position(mouse_x,mouse_y,self) != noone and !place_meeting(x,y,obj_player) and global.dragging = false
+		{
+			image_index = 3 //yellow
+		}else
+		{
+			image_index = 0
+		}
 	}
-}else
-{
-	image_alpha = 1	
+
 }

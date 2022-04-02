@@ -56,10 +56,10 @@ if grab = true
 
 
 //grounded
-if place_meeting(x,y+1,obj_ground) or place_meeting(x,y+1,obj_bridge)
+if place_meeting(x,y+1,obj_ground) or place_meeting(x,y+1,obj_bridge) and !place_meeting(x,y,obj_bridge)
 {
 	grounded = true
-}else
+}else if !place_meeting(x,y+1,obj_ground) and !place_meeting(x,y+1,obj_bridge) or place_meeting(x,y,obj_bridge)
 {
 	grounded = false
 }
@@ -97,4 +97,8 @@ if (place_meeting(x,y+vsp,obj_bridge))
 }
 y = y + vsp;
 
-//SNAP
+//mouse left object
+if instance_position(mouse_x,mouse_y,self) = noone and grab = false
+{
+	yellow = true
+}

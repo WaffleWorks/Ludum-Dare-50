@@ -1,7 +1,7 @@
 {
   "spriteId": {
-    "name": "spr_green",
-    "path": "sprites/spr_green/spr_green.yy",
+    "name": "spr_finishline",
+    "path": "sprites/spr_finishline/spr_finishline.yy",
   },
   "solid": false,
   "visible": true,

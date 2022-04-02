@@ -1,4 +1,4 @@
-if !place_meeting(x,y,obj_player) and global.dragging = false
+if !place_meeting(x,y,obj_player) and global.dragging = false and sprite_index = init_sprite
 {
 	grab = true
 	depth = -1
