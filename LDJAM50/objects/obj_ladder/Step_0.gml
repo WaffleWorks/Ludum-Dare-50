@@ -83,7 +83,7 @@ x = x + hsp;
 var onepixel = sign(vsp)
 if (place_meeting(x,y+vsp,obj_ground))
 {
-    while (!place_meeting(x,y+onepixel,obj_ground))
+    //while (!place_meeting(x,y+onepixel,obj_ground))
     {
         //y = y + onepixel;
     }
@@ -92,7 +92,7 @@ if (place_meeting(x,y+vsp,obj_ground))
 
 if (place_meeting(x,y+vsp,obj_bridge))
 {
-    while (!place_meeting(x,y+onepixel,obj_bridge))
+    //while (!place_meeting(x,y+onepixel,obj_bridge))
     {
         //y = y + onepixel;
     }

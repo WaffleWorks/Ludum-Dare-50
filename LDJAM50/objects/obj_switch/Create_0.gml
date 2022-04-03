@@ -7,3 +7,4 @@ hcells = room_width div cell_width
 vcells = room_height div cell_height
 
 switchable = false
+global.on = on

@@ -1,4 +1,4 @@
-if on = true
+if global.on = true
 {
 	image_index = 0
 }else
@@ -10,7 +10,7 @@ if place_meeting(x,y,obj_player)
 {
 	if x+8 = obj_player.x and switchable = false
 	{
-		on = not on
+		global.on = not global.on
 		switchable = true
 		alarm[0] = 30
 		audio_play_sound(snd_switch,0,false)
@@ -19,7 +19,7 @@ if place_meeting(x,y,obj_player)
 	{
 		if other.index = index
 		{
-			off = not other.on
+			off = not global.on
 		}
 	}
 

@@ -150,9 +150,9 @@ if (place_meeting(x+hsp,y,obj_collidabledraggable))  and dead = false
 {
 	if instance_nearest(x,y+8,obj_collidabledraggable).grab = false
 	{
-	    while (!place_meeting(x+sign(hsp),y,obj_collidabledraggable))
+	    //while (!place_meeting(x+sign(hsp),y,obj_collidabledraggable))
 	    {
-	        x += sign(hsp)
+	        //x += sign(hsp)
 	    }
 		if grounded = true
 		{

@@ -1,12 +1,12 @@
 {
   "spriteId": {
-    "name": "spr_black",
-    "path": "sprites/spr_black/spr_black.yy",
+    "name": "spr_cursor",
+    "path": "sprites/spr_cursor/spr_cursor.yy",
   },
   "solid": false,
   "visible": true,
   "spriteMaskId": null,
-  "persistent": false,
+  "persistent": true,
   "parentObjectId": null,
   "physicsObject": false,
   "physicsSensor": false,
