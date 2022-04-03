@@ -227,6 +227,7 @@ if place_meeting(x,y,obj_finishline)
 //DIE
 if dead = true
 {
+	sprite_index = spr_playerangel
 	if image_alpha > 0
 	{
 		image_alpha -= 0.025
@@ -237,8 +238,14 @@ if dead = true
 	}
 	idle = true
 	hsp = 0
-	vsp = 0
+	vsp = -1
 	image_speed = 0	
+}else
+{
+	if image_alpha < 1
+	{
+		image_alpha += 0.025	
+	}
 }
 
 move_snap(1,1)

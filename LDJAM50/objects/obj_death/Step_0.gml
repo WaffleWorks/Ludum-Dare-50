@@ -30,9 +30,11 @@ if direction >= 135 and direction <= 225
 	image_xscale = -1
 }
 
-if place_meeting(x,y,obj_player) and active = true
+if place_meeting(x,y,obj_player) and active = true and obj_player.dead = false
 {
 	obj_player.dead = true
+	obj_player.image_alpha = 2
+	audio_play_sound(snd_death,0,false)
 }
 
 if instance_exists(obj_fadeout) or obj_player.dead = true

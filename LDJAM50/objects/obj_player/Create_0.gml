@@ -17,3 +17,5 @@ alarm[0] = 90
 dead = false
 
 depth = -5
+
+image_alpha = -1
