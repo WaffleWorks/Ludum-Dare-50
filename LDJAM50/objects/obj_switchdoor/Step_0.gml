@@ -5,7 +5,9 @@ if off = false
 }else
 {
 	mask_index = spr_nothing
-	alpha = 0.5
+	alpha = 0.25
+	global.grid = mp_grid_create(0,0,hcells,vcells,cell_width,cell_height)
+	mp_grid_add_instances(global.grid,obj_groundparent,false)
 }
 
 with obj_switch

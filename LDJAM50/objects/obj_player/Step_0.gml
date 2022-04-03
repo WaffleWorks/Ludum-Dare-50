@@ -119,7 +119,7 @@ if place_meeting(x,y+1,obj_ground) or place_meeting(x,y+1,obj_bridge) and bbox_b
 	grounded = false
 }else 
 {
-	if instance_nearest(x-8,y+8,obj_collidabledraggable).grab = false
+	if instance_nearest(x,y+8,obj_collidabledraggable).grab = false and spring = false
 	{
 		grounded = true
 	}else
@@ -131,8 +131,9 @@ show_debug_message(grounded)
 
 //Check for horizontal collisions
 var onepixel = sign(hsp)
+var onepixel2 = sign(hsp)
 //ground
-if (place_meeting(x+hsp,y,obj_ground))
+if (place_meeting(x+hsp,y,obj_ground)) and dead = false
 {
     while (!place_meeting(x+onepixel,y,obj_ground))
     {
@@ -145,13 +146,13 @@ if (place_meeting(x+hsp,y,obj_ground))
     hsp = 0;
 }
 //object
-if (place_meeting(x+hsp,y,obj_collidabledraggable)) 
+if (place_meeting(x+hsp,y,obj_collidabledraggable))  and dead = false
 {
 	if instance_nearest(x,y+8,obj_collidabledraggable).grab = false
 	{
-	    while (!place_meeting(x+onepixel,y,obj_collidabledraggable))
+	    while (!place_meeting(x+sign(hsp),y,obj_collidabledraggable))
 	    {
-	        x = x + onepixel;
+	        x += sign(hsp)
 	    }
 		if grounded = true
 		{
@@ -163,8 +164,9 @@ if (place_meeting(x+hsp,y,obj_collidabledraggable))
 x = x + hsp;
 //Check for vertical collision
 var onepixel = sign(vsp)
+var onepixel2 = sign(vsp)
 //ground
-if (place_meeting(x,y+vsp,obj_ground))
+if (place_meeting(x,y+vsp,obj_ground)) and dead = false
 {
 	while (!place_meeting(x,y+onepixel,obj_ground))
 	{
@@ -173,19 +175,19 @@ if (place_meeting(x,y+vsp,obj_ground))
 	vsp = 0;
 }
 //object
-if (place_meeting(x,y+vsp,obj_collidabledraggable)) 
+if (place_meeting(x,y+vsp,obj_collidabledraggable)) and dead = false
 {
-	if instance_nearest(x-8,y+8,obj_collidabledraggable).grab = false
+	if instance_nearest(x,y+8,obj_collidabledraggable).grab = false
 	{
-	    while (!place_meeting(x,y+onepixel,obj_collidabledraggable))
+	    //while (!place_meeting(x,y+sign(vsp),obj_collidabledraggable))
 	    {
-	        y = y + onepixel;
+	        //y += sign(vsp);
 	    }
 	    vsp = 0;
 	}
 }
 //bridge
-if (place_meeting(x,y+vsp,obj_bridge))// and instance_nearest(x,y,obj_bridge).grab = false
+if (place_meeting(x,y+vsp,obj_bridge)) and dead = false // and instance_nearest(x,y,obj_bridge).grab = false
 {
 	if bbox_bottom < instance_nearest(x,y,obj_bridge).bbox_bottom
 	and vsp >= 0

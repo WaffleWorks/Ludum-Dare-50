@@ -66,10 +66,10 @@ if grab = true
 
 
 //grounded
-if place_meeting(x,y+1,obj_ground) or place_meeting(x,y+1,obj_bridge) and !place_meeting(x,y,obj_bridge)
+if place_meeting(x,y+1,obj_ground) or place_meeting(x,y+1,obj_bridge) and !place_meeting(x,y,obj_bridge) and !place_meeting(x,y+1,obj_ladder)
 {
 	grounded = true
-}else if !place_meeting(x,y+1,obj_ground) and !place_meeting(x,y+1,obj_bridge) or place_meeting(x,y,obj_bridge)
+}else if !place_meeting(x,y+1,obj_ground) and !place_meeting(x,y+1,obj_bridge) or place_meeting(x,y,obj_bridge) or place_meeting(x,y+1,obj_ladder)
 {
 	grounded = false
 }

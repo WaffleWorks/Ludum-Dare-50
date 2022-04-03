@@ -13,6 +13,7 @@ if place_meeting(x,y,obj_player)
 		on = not on
 		switchable = true
 		alarm[0] = 30
+		audio_play_sound(snd_switch,0,false)
 	}
 	with obj_switchdoor
 	{
@@ -22,8 +23,6 @@ if place_meeting(x,y,obj_player)
 		}
 	}
 
-	global.grid = mp_grid_create(0,0,hcells,vcells,cell_width,cell_height)
-
-	mp_grid_add_instances(global.grid,obj_groundparent,false)
+	
 
 }
