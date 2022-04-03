@@ -5,7 +5,10 @@
   },
   "solid": false,
   "visible": true,
-  "spriteMaskId": null,
+  "spriteMaskId": {
+    "name": "spr_springselectmask",
+    "path": "sprites/spr_springselectmask/spr_springselectmask.yy",
+  },
   "persistent": false,
   "parentObjectId": null,
   "physicsObject": false,

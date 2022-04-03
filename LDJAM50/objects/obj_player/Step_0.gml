@@ -11,6 +11,7 @@ if place_meeting(x,y,obj_ladder) and walking = true and instance_nearest(x,y,obj
 if !place_meeting(x,y,obj_ladder) and ladder = true 
 {
 	ladder = false
+	x+=dir
 	vsp = 0
 	walking = true
 	if grounded = false
@@ -76,12 +77,19 @@ if ladder = true and dead = false
 	hsp = 0
 	vsp = -1
 	spring = false
-	
+	mask_index = spr_playerclimbing
 	sprite_index = spr_playerclimbing
+}else if grounded = true
+{
+	if walking = true
+	{
+		mask_index = spr_playeridle
+	}
 }
 //spring
 if spring = true
 {
+	hsp = 0
 	vsp = vsp + grv;
 	if vsp > 0 and grounded = true
 	{
@@ -90,7 +98,7 @@ if spring = true
 }
 
 //airborn sprite
-if grounded = false and sprite_index != spr_playerclimbing
+if grounded = false and sprite_index != spr_playerclimbing and mask_index != spr_playerclimbing
 {
 	sprite_index = spr_playerairborn
 	if vsp < 0
@@ -103,19 +111,23 @@ if grounded = false and sprite_index != spr_playerclimbing
 }
 
 //COLLISIONS
-if place_meeting(x,y+1,obj_ground) or place_meeting(x,y+1,obj_bridge)
+if place_meeting(x,y+1,obj_ground) or place_meeting(x,y+1,obj_bridge) and bbox_bottom < instance_nearest(x,y,obj_bridge).bbox_bottom
 {
 	grounded = true
-}else if place_meeting(x,y+1,obj_collidabledraggable)
-{
-	if instance_nearest(x-8,y-8,obj_collidabledraggable).grab = false
-	{
-		grounded = true
-	}
-}else
+}else if !place_meeting(x,y+1,obj_collidabledraggable)
 {
 	grounded = false
+}else 
+{
+	if instance_nearest(x-8,y+8,obj_collidabledraggable).grab = false
+	{
+		grounded = true
+	}else
+	{
+		grounded = false
+	}
 }
+show_debug_message(grounded)
 
 //Check for horizontal collisions
 var onepixel = sign(hsp)
@@ -126,19 +138,25 @@ if (place_meeting(x+hsp,y,obj_ground))
     {
         x = x + onepixel;
     }
-	dir *= -1
+	if grounded = true
+	{
+		dir *= -1
+	}
     hsp = 0;
 }
 //object
 if (place_meeting(x+hsp,y,obj_collidabledraggable)) 
 {
-	if instance_nearest(x-8,y-8,obj_collidabledraggable).grab = false
+	if instance_nearest(x,y+8,obj_collidabledraggable).grab = false
 	{
 	    while (!place_meeting(x+onepixel,y,obj_collidabledraggable))
 	    {
 	        x = x + onepixel;
 	    }
-		dir *= -1
+		if grounded = true
+		{
+			dir *= -1
+		}
 	    hsp = 0;
 	}
 }
@@ -157,7 +175,7 @@ if (place_meeting(x,y+vsp,obj_ground))
 //object
 if (place_meeting(x,y+vsp,obj_collidabledraggable)) 
 {
-	if instance_nearest(x-8,y-8,obj_collidabledraggable).grab = false
+	if instance_nearest(x-8,y+8,obj_collidabledraggable).grab = false
 	{
 	    while (!place_meeting(x,y+onepixel,obj_collidabledraggable))
 	    {
@@ -196,6 +214,7 @@ if place_meeting(x,y,obj_finishline)
 	{
 		if !instance_exists(obj_fadeout)
 		{
+			audio_play_sound(snd_win,0,false)
 			instance_create_depth(0,0,0,obj_fadeout)
 			idle = true
 			hsp = 0
