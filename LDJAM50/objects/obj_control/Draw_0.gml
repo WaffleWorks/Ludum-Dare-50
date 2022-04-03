@@ -8,6 +8,6 @@ if room = Menu
 	draw_set_valign(fa_center)
 	if blink = true
 	{
-		draw_text(room_width/2,room_height/2-32,"Press Any Key to Begin.")
+		draw_text_outlined(room_width/2,room_height/2-32,make_color_rgb(39,39,68),make_color_rgb(73,77,126),"Press Any Key to Begin.")
 	}
 }

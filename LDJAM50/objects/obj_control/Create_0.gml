@@ -59,5 +59,9 @@ if room = Level12
 }
 if room = LastLevel
 {
+	global.next_room = Credits
+}
+if room = Credits
+{
 	global.next_room = Menu
 }
